@@ -36,6 +36,12 @@
         </nav>
         <!-- Navbar -->
 
+        <div th:if=${session.msg}>
+            <div class="alert alert-success" role="alert" th:text="${session.msg}"></div>  
+            <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+        </div>
+
+
         <div class="container p-5">
             <table class="table table-striped">   
                 <thead class="bg-primary text-white">
@@ -48,18 +54,23 @@
                         <th scope="col">Telephone Number</th>
                         <th scope="col">Salary</th>
                         <th scope="col">Department</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Jacob</td>
-                        <td>New York City</td>
-                        <td>mark_j@mail.com</td>
-                        <td>0900505555</td>
-                        <td>30000</td>
-                        <td>Research & Development</td>
+                    <tr th:each="e: ${employee}">
+                        <th th:text="${e.id}">1</th>
+                        <td th:text="${e.firstName}"></td>
+                        <td th:text="${e.lastName}"></td>
+                        <td th:text="${e.address}"></td>
+                        <td th:text="${e.email}"></td>
+                        <td th:text="${e.telephoneNumber}"></td>
+                        <td th:text="${e.salary}"></td>
+                        <td th:text="${e.department}"></td>
+                        <td>
+                            <a class="btn btn-sm btn-primary">Edit</a>
+                            <a class="btn btn-sm btn-danger">Delete</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
