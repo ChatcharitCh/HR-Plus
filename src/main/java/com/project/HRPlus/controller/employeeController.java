@@ -2,8 +2,7 @@
 package com.project.HRPlus.controller;
 
 import com.project.HRPlus.entity.Employee;
-import com.project.HRPlus.service.employeeService;
-import jakarta.servlet.http.HttpSession;
+import com.project.HRPlus.service.EmployeeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,15 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
-public class employeeController {
-    @Autowired
-    private employeeService employeeService;
+public class EmployeeController {
     
-    @GetMapping("/")
+    
+    @Autowired
+    private EmployeeService employeeService;
+    
+
+    @GetMapping("/home")
     public String home(Model model){
         List<Employee> employeeList = employeeService.getAllEmployee();
         model.addAttribute("employee", employeeList);
-        return "index";
+        return "home";
     }
     
     @GetMapping("/addemployee")
@@ -36,7 +38,7 @@ public class employeeController {
         
         System.out.println(employee);
         employeeService.addEmployee(employee);
-        return "redirect:/";
+        return "redirect:/home";
     }
     
     @GetMapping("/edit/{id}")
@@ -50,13 +52,15 @@ public class employeeController {
     @PostMapping("/update")
     public String updateEmployee(@ModelAttribute Employee employee) {
         employeeService.addEmployee(employee);
-        return "redirect:/";
+        return "redirect:/home";
     }
     
     @GetMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable int id) {
         
         employeeService.deleteEmployee(id);
-        return "redirect:/";
+        return "redirect:/home";
     }
+    
+    
 }

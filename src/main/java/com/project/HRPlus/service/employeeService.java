@@ -2,17 +2,17 @@
 package com.project.HRPlus.service;
 
 import com.project.HRPlus.entity.Employee;
-import com.project.HRPlus.repository.employeeRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.project.HRPlus.repository.EmployeeRepository;
 
 @Service
-public class employeeService {
+public class EmployeeService {
     
     @Autowired
-    private employeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
     
     public void addEmployee(Employee employee) {
         employeeRepository.save(employee);
